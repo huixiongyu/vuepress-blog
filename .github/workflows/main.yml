@@ -40,5 +40,5 @@ jobs:
               git config --global user.name "huixiongyu"
               git add .
               git commit -m "deploy"
-              git push --force --quiet "git@github.com:huixiongyu/vuepress-publish.git" gh-pages
+              git push --force git@github.com:huixiongyu/vuepress-publish.git master:gh-pages
           
