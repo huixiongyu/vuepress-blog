@@ -22,6 +22,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
+          token: ${{ secrets.TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v1
@@ -38,5 +39,5 @@ jobs:
           echo '${{ secrets.CNAME }}' > CNAME
           git init && git add .
           git commit -m "deploy"
-          git push --force --quiet "https://oauth2:${{ secrets.TOKEN }}@github.com/huixiongyu/vuepress-publish.git" master:gh-pages
+          git push --force --quiet origin master:gh-pages
           
