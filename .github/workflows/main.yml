@@ -57,5 +57,5 @@ jobs:
         region: oss-cn-guangzhou
         bucket: huixiong-blog
         assets: ｜
-          docs/.vuepress/dist/**:/
+          ./**:/public/
           
