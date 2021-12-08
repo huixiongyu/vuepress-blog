@@ -18,26 +18,15 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # 在当前环境中拉取你仓库然后进入到目录，下面的步骤在仓库的根目录中进行
-      - name: Checkout source
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@master
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-          run: |
-              yarn add -D vuepress
-              yarn install
-              yarn docs:build
-              cd docs/.vuepress/dist
-              ls
-              echo '${{ secrets.CNAME }}' > CNAME
-              git init
-              git config --global user.email "huixiongyu@gmail.com"
-              git config --global user.name "huixiongyu"
-              git add .
-              git commit -m "deploy"
-              git push --force "https://${{ secrets.TOKEN }}@github.com/huixiongyu/vuepress-publish.git" master:gh-pages
+      - name: vuepress-deploy
+        uses: jenkey2011/vuepress-deploy@master
+        env:
+          ACCESS_TOKEN: ${{ secrets.TOKEN }}
+          TARGET_REPO: huixiongyu/vuepress-publish
+          TARGET_BRANCH: gh-pages
+          BUILD_SCRIPT: yarn && yarn build
+          BUILD_DIR: blog/.vuepress/dist/
           
