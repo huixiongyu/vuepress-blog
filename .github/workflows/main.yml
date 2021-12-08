@@ -21,7 +21,6 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
         with:
-          submodules: true
           token: ${{ secrets.TOKEN }}
 
       - name: Setup Node.js
@@ -40,5 +39,5 @@ jobs:
               git config --global user.name "huixiongyu"
               git add .
               git commit -m "deploy"
-              git push --force git@github.com:huixiongyu/vuepress-publish.git master:gh-pages
+              git push --force "https://${{ secrets.TOKEN }}@github.com/huixiongyu/vuepress-publish.git" master:gh-pages
           
