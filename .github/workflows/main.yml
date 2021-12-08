@@ -37,7 +37,10 @@ jobs:
       - name: push code
         run: |
           echo '${{ secrets.CNAME }}' > CNAME
-          git init && git add .
+          git init
+          git config --global user.email "huixiongyu@gmail.com"
+          git config --global user.name "huixiongyu"
+          git add .
           git commit -m "deploy"
           git push --force --quiet origin master:gh-pages
           
