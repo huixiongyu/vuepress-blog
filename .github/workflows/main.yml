@@ -44,7 +44,7 @@ jobs:
     - run: |
           yarn add -D vuepress
           yarn install
-          yarn docs:build
+          yarn build
           cd docs/.vuepress/dist
           echo '${{ secrets.OSS_CNAME }}' > CNAME
             
