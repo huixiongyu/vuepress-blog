@@ -37,8 +37,10 @@ jobs:
               yarn docs:build
               cd docs/.vuepress/dist
               echo '${{ secrets.CNAME }}' > CNAME
+              ls
+              pwd
               git init && git add .
               git commit -m "deploy"
-              git push --force --quiet "https://$TOKEN@github.com/$USER_NAME/$PRO_NAME.git" origin gh-pages
+              git push --force --quiet "https://$TOKEN@github.com/$USER_NAME/$PRO_NAME.git" master:gh-pages
 
           
