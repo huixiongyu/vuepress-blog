@@ -1,3 +1,4 @@
 module.exports = {
-    base: "/vuepress_publish/"
+    base: "/vuepress-publish/",
+    title: '灰熊の博客'
 }
