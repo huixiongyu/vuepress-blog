@@ -25,10 +25,6 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v1
-        env:
-            TOKEN: ${{ secrets.TOKEN }}
-            USER_NAME: ${{ secrets.USER_NAME }}
-            PRO_NAME: ${{ secrets.PRO_NAME }}
         with:
           node-version: '14.x'
           run: |
@@ -41,6 +37,6 @@ jobs:
               pwd
               git init && git add .
               git commit -m "deploy"
-              git push --force --quiet "https://$TOKEN@github.com/$USER_NAME/$PRO_NAME.git" master:gh-pages
+              git push --force --quiet "https://${{ secrets.TOKEN }}@github.com/${{ secrets.USER_NAME }}/${{ secrets.PRO_NAME }}.git" master:gh-pages
 
           
