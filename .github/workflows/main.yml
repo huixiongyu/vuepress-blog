@@ -18,16 +18,20 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # 在当前环境中拉取你仓库然后进入到目录，下面的步骤在仓库的根目录中进行
-      - uses: actions/checkout@v2
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v1
         with:
           node-version: '14.x'
           run: |
               yarn add -D vuepress
               yarn install
               yarn docs:build
+              
       - name: Deploy to Github Pages
         run: |
           cd docs/.vuepress/dist
