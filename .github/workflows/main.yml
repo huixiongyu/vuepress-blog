@@ -24,12 +24,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14.x'
-      - run: |
-          yarn add -D vuepress
-          yarn install
-          yarn docs:build
+          run: |
+              yarn add -D vuepress
+              yarn install
+              yarn docs:build
       - name: Deploy to Github Pages
-      - run: |
+        run: |
           cd docs/.vuepress/dist
           echo '${{ secrets.CNAME }}' > CNAME
           git init && git add .
