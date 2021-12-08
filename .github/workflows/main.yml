@@ -36,18 +36,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '14.x'
-    - run: |
-          yarn add -D vuepress
-          yarn install
-          yarn build
-          cd docs/.vuepress/dist
-          echo '${{ secrets.OSS_CNAME }}' > CNAME
-            
     - name: Upload to oss
       id: upload_to_oss
       uses: tvrcgo/upload-to-oss@master
