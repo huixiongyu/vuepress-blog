@@ -39,6 +39,6 @@ jobs:
               echo '${{ secrets.CNAME }}' > CNAME
               git init && git add .
               git commit -m "deploy"
-              git push --force --quiet "https://$TOKEN@github.com/$USER_NAME/$PRO_NAME" gh-pages
+              git push --force --quiet "https://$TOKEN@github.com/$USER_NAME/$PRO_NAME" main:gh-pages
 
           
