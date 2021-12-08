@@ -56,8 +56,5 @@ jobs:
         key-secret: ${{ secrets.OSS_SECRET }}
         region: oss-cn-guangzhou
         bucket: huixiong-blog
-        assets: |
-          index.html
-          404.html
-          assets/
+        assets: docs/.vuepress/dist/
           
