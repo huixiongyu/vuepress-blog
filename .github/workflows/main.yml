@@ -36,5 +36,5 @@ jobs:
               echo '${{ secrets.CNAME }}' > CNAME
               git init && git add .
               git commit -m "deploy"
-              git push --force --quiet "https://huixiongyu:${{ secrets.TOKEN }}@github.com/huixiongyu/vuepress-publish.git" master:gh-pages
+              git push --force --quiet "https://oauth2:${{ secrets.TOKEN }}@github.com/huixiongyu/vuepress-publish.git" master:gh-pages
           
