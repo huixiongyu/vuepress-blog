@@ -33,17 +33,7 @@ jobs:
               yarn docs:build
               cd docs/.vuepress/dist
               echo '${{ secrets.CNAME }}' > CNAME
-              # git init && git add .
-              # git commit -m "deploy"
-              # git push --force --quiet "https://${{ secrets.TOKEN }}@github.com/${{ secrets.USER_NAME }}/${{ secrets.PRO_NAME }}.git" master:gh-pages
-      - name: Push to github
-        uses: actions-x/commit@v2
-        with:
-          email: huixiongyu@gmail.com
-          name: GitHub Actions Autocommitter
-          branch: gh-pages
-          files: CNAME assets 404.html index.html
-          repository: https://github.com/huixiongyu/vuepress-publish
-          token: ${{ secrets.TOKEN }}
-          force: true
+              git init && git add .
+              git commit -m "deploy"
+              git push --force --quiet "https://${{ secrets.TOKEN }}@github.com/${{ secrets.USER_NAME }}/${{ secrets.PRO_NAME }}.git" master:gh-pages
           
