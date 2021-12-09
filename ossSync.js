@@ -7,7 +7,6 @@ const {
     OSS_SECRET,
     OSS_URL,
 } = process.env;
-console.log(OSS_REGION, OSS_BUCKET)
 
 const client = new OSS({
     region: OSS_REGION, // 创建 bucket 选择的区域

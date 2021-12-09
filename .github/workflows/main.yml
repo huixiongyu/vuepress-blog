@@ -50,12 +50,11 @@ jobs:
         OSS_SECRET: ${{ secrets.OSS_SECRET }}
         OSS_URL: ${{ secrets.OSS_URL }}
       run: |
+        node changeOssPath.js
         yarn add -D vuepress
         yarn install
         yarn build
         echo '${{ secrets.OSS_CNAME }}' > docs/.vuepress/dist/CNAME
-        ls
-        pwd
         mv docs/.vuepress/dist ./
         ls
         pwd
