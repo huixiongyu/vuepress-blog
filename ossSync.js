@@ -1,6 +1,5 @@
 const fs = require('fs')
 const OSS = require('ali-oss')
-
 const {
     OSS_REGION,
     OSS_BUCKET,
@@ -16,17 +15,16 @@ const client = new OSS({
     accessKeySecret: OSS_SECRET, // accessKeySecret
 });
 
-function getLocalFileList(path) {
-    const basePath = path + '/dist'
+function getLocalFileList(basePath) {
     const fileNamelist = fs.readFileSync(basePath)
-    const result = []
+    let result = []
     fileNamelist.forEach(name => {
         const file = basePath + '/' + name
         const statsObj = fs.statSync(file);
         if (statsObj.isFile()) {
             result.push(file)
         } else {
-            result.concat(getLocalFileList(file));
+            result = result.concat(getLocalFileList(file));
         }
     })
     return result;
@@ -43,7 +41,7 @@ async function putOneFile(fileName, dir) {
 
 function main() {
     console.log('ossSync working...')
-    const fileList = getLocalFileList(__dirname)
+    const fileList = getLocalFileList(__dirname + '/dist')
     for(const file of fileList) {
         const tempList = file.split('dist/')
         const fileName = tempList[-1]
