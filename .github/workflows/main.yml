@@ -42,13 +42,7 @@ jobs:
       with:
         node-version: '14.x'
     
-    - name: Build and Upload
-      env:
-        OSS_REGION: ${{ secrets.OSS_REGION }}
-        OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
-        OSS_KEY: ${{ secrets.OSS_KEY }}
-        OSS_SECRET: ${{ secrets.OSS_SECRET }}
-        OSS_URL: ${{ secrets.OSS_URL }}
+    - name: Build Web
       run: |
         node changeOssPath.js
         yarn add -D vuepress
@@ -56,10 +50,27 @@ jobs:
         yarn build
         echo '${{ secrets.OSS_CNAME }}' > docs/.vuepress/dist/CNAME
         mv docs/.vuepress/dist ./
+        
+    - name: Upload to OSS
+      env:
+        OSS_REGION: ${{ secrets.OSS_REGION }}
+        OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
+        OSS_KEY: ${{ secrets.OSS_KEY }}
+        OSS_SECRET: ${{ secrets.OSS_SECRET }}
+        OSS_URL: ${{ secrets.OSS_URL }}
+      run: |
         ls
         pwd
         node ossSync.js
-        
+
+    - name: Upload to Could Computer
+      uses: SamKirkland/FTP-Deploy-Action@4.2.0
+      with:
+        server: ${{ secrets.IP_ADDRESS }}
+        username: ${{ secrets.SERVER_USER }}
+        password: ${{ secrets.SERVER_PASSWORD }}
+        local-dir: dist/
+        server-dir: /root/temp/        
       
 
       
