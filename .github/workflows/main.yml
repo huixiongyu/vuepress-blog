@@ -42,7 +42,13 @@ jobs:
       with:
         node-version: '14.x'
     
-    - name: Build Web
+    - name: Build and Upload
+      env:
+        OSS_REGION: ${{ secrets.OSS_REGION }}
+        OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
+        OSS_KEY: ${{ secrets.OSS_KEY }}
+        OSS_SECRET: ${{ secrets.OSS_SECRET }}
+        OSS_URL: ${{ secrets.OSS_URL }}
       run: |
         yarn add -D vuepress
         yarn install
@@ -50,19 +56,12 @@ jobs:
         echo '${{ secrets.OSS_CNAME }}' > docs/.vuepress/dist/CNAME
         ls
         pwd
-        mv docs/.vuepress/dist ./ 
-
-    - name: Upload to oss
-      run: |
+        mv docs/.vuepress/dist ./
         ls
         pwd
         node ossSync.js
-      env:
-        OSS_REGION: ${{ secrets.OSS_REGION }}
-        OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
-        OSS_KEY: ${{ secrets.OSS_KEY }}
-        OSS_SECRET: ${{ secrets.OSS_SECRET }}
-        OSS_URL: ${{ secrets.OSS_URL }}
+        
+      
 
       
           
