@@ -7,6 +7,7 @@ const {
     OSS_SECRET,
     OSS_URL,
 } = process.env;
+console.log(OSS_REGION, OSS_BUCKET)
 
 const client = new OSS({
     region: OSS_REGION, // 创建 bucket 选择的区域
@@ -17,7 +18,8 @@ const client = new OSS({
 
 function getLocalFileList(basePath) {
     console.log(`current path is:${basePath}`)
-    const fileNamelist = fs.readFileSync(basePath)
+    const fileNamelist = fs.readdirSync(basePath)
+    console.log(fileNamelist)
     let result = []
     fileNamelist.forEach(name => {
         const file = basePath + name
