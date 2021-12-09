@@ -42,14 +42,14 @@ async function putOneFile(fileName, dir) {
     }
 }
 
-function main() {
+async function main() {
     console.log('ossSync working...')
     const fileList = getLocalFileList(__dirname + '/dist/')
     console.log(fileList)
     for(const file of fileList) {
-        const tempList = file.split('dist/')
-        const fileName = tempList[-1]
-        putOneFile(fileName, file)
+        const tempList = file.split('/dist/')
+        const fileName = tempList[1]
+        await putOneFile(fileName, file)
     }
     console.log('ossSync completed!')
 }
