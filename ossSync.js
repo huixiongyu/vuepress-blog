@@ -20,12 +20,12 @@ function getLocalFileList(basePath) {
     const fileNamelist = fs.readFileSync(basePath)
     let result = []
     fileNamelist.forEach(name => {
-        const file = basePath + '/' + name
+        const file = basePath + name
         const statsObj = fs.statSync(file);
         if (statsObj.isFile()) {
             result.push(file)
         } else {
-            result = result.concat(getLocalFileList(file));
+            result = result.concat(getLocalFileList(file + '/'));
         }
     })
     return result;
@@ -42,7 +42,7 @@ async function putOneFile(fileName, dir) {
 
 function main() {
     console.log('ossSync working...')
-    const fileList = getLocalFileList(__dirname + '/dist')
+    const fileList = getLocalFileList(__dirname + '/dist/')
     console.log(fileList)
     for(const file of fileList) {
         const tempList = file.split('dist/')
