@@ -37,10 +37,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Build Web
+    - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
         node-version: '14.x'
+    
+    - name: Build Web
       run: |
         yarn add -D vuepress
         yarn install
