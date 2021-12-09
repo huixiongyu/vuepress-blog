@@ -36,14 +36,26 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
-    - name: Upload to oss
-      id: upload_to_oss
-      uses: tvrcgo/upload-to-oss@master
+
+    - name: Build Web
+      uses: actions/setup-node@v1
       with:
-        key-id: ${{ secrets.OSS_KEY }}
-        key-secret: ${{ secrets.OSS_SECRET }}
-        region: oss-cn-guangzhou
-        bucket: huixiong-blog
-        assets: ｜
-          ./**:/public/
+        node-version: '14.x'
+      run: |
+        yarn add -D vuepress
+        yarn install
+        yarn build
+        echo '${{ secrets.OSS_CNAME }}' > docs/.vuepress/dist/CNAME
+        mv docs/.vuepress/dist ./ 
+
+    - name: Upload to oss
+      run: node ossSync.js
+      env:
+        OSS_REGION: ${{ secrets.OSS_REGION }}
+        OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
+        OSS_KEY: ${{ secrets.OSS_KEY }}
+        OSS_SECRET: ${{ secrets.OSS_SECRET }}
+        OSS_URL: ${{ secrets.OSS_URL }}
+
+      
           

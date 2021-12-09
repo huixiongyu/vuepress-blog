@@ -9,5 +9,8 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs"
+  },
+  "dependencies": {
+    "ali-oss": "^6.16.0"
   }
 }
