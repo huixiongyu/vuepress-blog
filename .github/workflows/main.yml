@@ -48,10 +48,15 @@ jobs:
         yarn install
         yarn build
         echo '${{ secrets.OSS_CNAME }}' > docs/.vuepress/dist/CNAME
+        ls
+        pwd
         mv docs/.vuepress/dist ./ 
 
     - name: Upload to oss
-      run: node ossSync.js
+      run: |
+        ls
+        pwd
+        node ossSync.js
       env:
         OSS_REGION: ${{ secrets.OSS_REGION }}
         OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
