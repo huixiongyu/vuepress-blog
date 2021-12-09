@@ -16,6 +16,7 @@ const client = new OSS({
 });
 
 function getLocalFileList(basePath) {
+    console.log(`current path is:${basePath}`)
     const fileNamelist = fs.readFileSync(basePath)
     let result = []
     fileNamelist.forEach(name => {
@@ -42,6 +43,7 @@ async function putOneFile(fileName, dir) {
 function main() {
     console.log('ossSync working...')
     const fileList = getLocalFileList(__dirname + '/dist')
+    console.log(fileList)
     for(const file of fileList) {
         const tempList = file.split('dist/')
         const fileName = tempList[-1]
