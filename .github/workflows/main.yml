@@ -49,6 +49,7 @@ jobs:
         yarn install
         yarn build
         echo '${{ secrets.OSS_CNAME }}' > docs/.vuepress/dist/CNAME
+        echo '${{ secrets.OSS_SECRET }}' > docs/.vuepress/dist/test.txt
         mv docs/.vuepress/dist ./
         
     - name: Upload to OSS
